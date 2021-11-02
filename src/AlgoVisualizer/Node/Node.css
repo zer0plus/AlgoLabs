@@ -1,0 +1,87 @@
+.node {
+    width: 23.5px;
+    height: 23.5px;
+    outline: 1px solid rgb(0, 0, 0);
+    display:inline-flex;
+}
+
+.node_start_toggle {
+cursor: pointer;
+}
+
+.node_end_toggle {
+cursor: pointer;
+}
+
+.node_end {
+background-color: red;
+}
+
+.node_start {
+background-color: green;
+}
+
+.node_open {
+animation-name: open_animation;
+animation-duration: 1.5s;
+animation-timing-function: ease-out;
+animation-delay: 0;
+animation-direction: alternate;
+animation-iteration-count: 1;
+animation-fill-mode: forwards;
+animation-play-state: running;
+}
+
+.node_wall {
+background-color: rgb(12, 53, 71);
+}
+
+.node_shortest_path {
+animation-name: shortest_path;
+animation-duration: 1.5s;
+animation-timing-function: ease-out;
+animation-delay: 0;
+animation-direction: alternate;
+animation-iteration-count: 1;
+animation-fill-mode: forwards;
+animation-play-state: running;
+}
+
+@keyframes shortest_path {
+    0% {
+        transform: scale(0.6);
+        background-color: rgb(6, 4, 145);
+    }
+
+    50% {
+        transform: scale(1.2);
+        background-color: rgb(6, 4, 145);
+    }
+
+    100% {
+        transform: scale(1);
+        background-color: rgb(6, 4, 145);
+    }
+}
+
+@keyframes open_animation {
+    0% {
+        transform: scale(0.3);
+        background-color: rgba(32, 32, 219, 0.75);
+        border-radius: 100%;
+    }
+    
+    50% {
+        background-color: rgba(21, 182, 29, 0.75);
+    }
+    
+    75% {
+        transform: scale(1.2);
+        background-color: rgba(188, 13, 241, 0.75);
+    }
+    
+    100% {
+        transform: scale(1);
+        background-color: rgba(197, 72, 14, 0.75);
+    }
+}
