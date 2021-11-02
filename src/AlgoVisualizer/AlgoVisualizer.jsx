@@ -200,7 +200,6 @@ export default class AlgoVisualizer extends Component {
         console.log("Rendering...");
         return(
             <> 
-                {/* <Navbar></Navbar> */}
                 <div className="grid">
                     <button className = "dijkstra_btn" onClick = {() => this.visualizeDijkstra()}>Visualize Dijkstra!</button>
                     <button className = "start_btn" onClick = {() => this.startBtn()}>Select Start Node</button>
