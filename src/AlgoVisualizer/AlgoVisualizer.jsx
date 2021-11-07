@@ -46,10 +46,8 @@ export default class AlgoVisualizer extends Component {
             const currentRow = [];
             for (let col = 0; col < MAX_COL; col++) {
                 currentRow.push(createNode(col, row));
-                // this.setState({colS: col});
             }
             grid.push(currentRow);
-            // this.setState({rowS: row});
         }
         // Sets the current state to the 50 x 20 grid
         this.setState({grid: grid});
@@ -58,18 +56,67 @@ export default class AlgoVisualizer extends Component {
     //Fix Double visualize issue
     resetBtn() {
         const tempGrid = [...this.state.grid];
+        // // DEBUG CODE 
+        // console.log("DEBUG CODE ");
+        // console.log(startCol);
+        // console.log(startRow);
+        // console.log(endCol);
+        // console.log(endRow);
+
+        this.start = false;
+        this.end = false;
+
         // Initializes the grid
         for (let row = 0; row < MAX_ROW; row++) {
             const currentRow = [];
             for (let col = 0; col < MAX_COL; col++) {
                 document.getElementById(`node-${row}-${col}`).className ='node';
-                // this.setState({colS: col});
+                tempGrid[row][col].start = false;
+                tempGrid[row][col].end = false;
+                tempGrid[row][col].isStartToggle = false;
+                tempGrid[row][col].isEndToggle = false;
+                tempGrid[row][col].dikjstra_distance = Infinity;
+                tempGrid[row][col].prevNode = null;
+                // currentRow.push(createNode(col, row));
             }
             // tempGrid.push(currentRow);
-            // this.setState({rowS: row});
         }
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+        // const tempGrid = [];
+        // // Initializes the grid
+        // for (let row = 0; row < MAX_ROW; row++) {
+        //     const currentRow = [];
+        //     for (let col = 0; col < MAX_COL; col++) {
+        //         currentRow.push(createNode(col, row));
+        //     }
+        //     tempGrid.push(currentRow);
+        // }
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+
+        let {startRow} = this.state;
+        let {startCol} = this.state;
+        let {endRow} = this.state;
+        let {endCol} = this.state;
+        startRow = null;
+        startCol = null;
+        endRow = null;
+        endCol = null;
+
         // Sets the current state to the 50 x 20 grid
-        this.setState({grid: tempGrid});
+        this.setState({
+            grid: tempGrid,
+            startRow: startRow,
+            startCol: startCol,
+            endRow: endRow,
+            endCol: endCol
+        });
+
+        // DEBUG CODE 
+        console.log("DEBUG CODE ");
+        console.log(startCol);
+        console.log(startRow);
+        console.log(endCol);
+        console.log(endRow);
     }
 
     visualizeDijkstra() {
@@ -129,6 +176,7 @@ export default class AlgoVisualizer extends Component {
         }
     }
 
+    // Changes a node's color to green when clicked to be an start point.
     visualizeStart(currRow, currCol) {
         console.log("SYS: Start Selected");
         const tempGrid = [...this.state.grid];
@@ -149,6 +197,7 @@ export default class AlgoVisualizer extends Component {
         });        
     }
 
+    // Changes a node's color to red when clicked to be an end point.
     visualizeEnd(currRow, currCol) {
         console.log("SYS: End Selected");
         const tempGrid = [...this.state.grid];
@@ -169,6 +218,7 @@ export default class AlgoVisualizer extends Component {
         });        
     }
 
+    // Turns all the nodes clickable to be a start point
     startBtn() {
         this.isEndToggle = false;
         let tempGrid = [...this.state.grid];
@@ -182,6 +232,7 @@ export default class AlgoVisualizer extends Component {
         //https://stackoverflow.com/questions/29537299/react-how-to-update-state-item1-in-state-using-setstate
     }
 
+    // Turns all the nodes clickable to be an end point
     endBtn() {
         console.log("end");
         this.isStartToggle = false;
@@ -213,6 +264,7 @@ export default class AlgoVisualizer extends Component {
                                 {/* The col map() method creates a new array with the results of calling a function for every array element. */}
                                 {row.map((node, ndx) => {
                                     const {row, col, end, start, isWall ,isStartToggle, isEndToggle} = node;
+                                    console.log("node");
                                     return (
                                         <Node
                                             // Send back key and col as row and col to intercept when a thing is clicked

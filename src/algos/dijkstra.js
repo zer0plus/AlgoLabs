@@ -3,20 +3,20 @@ import { MAX_COL, MAX_ROW } from "../constants";
 export function dijkstra(grid, start, end) {
     // the main grid passed here could just be 1d with all the 
     // node ojbects in order as they have row, col property anyway
-    const nodes = [];
+    const nodes_1d_arr = [];
     const dijkstra_nodes = [];
     start.dikjstra_distance = 0;
  
     // Adding all nodes which are set to closed
     for (const row of grid) {
         for (const node of row) {
-            nodes.push(node);
+            nodes_1d_arr.push(node);
         }
     }
 
-    while (!!nodes.length) {
-        sortNodes(nodes);
-        const closestNode = nodes.shift();
+    while (!!nodes_1d_arr.length) {
+        sortNodes(nodes_1d_arr);
+        const closestNode = nodes_1d_arr.shift();
 
         if (closestNode.isWall) {
             continue;
@@ -35,9 +35,9 @@ export function dijkstra(grid, start, end) {
         const closestNeighbors = findNeighbor(closestNode, grid);
         
         // Setting distances of available neighboring closed nodes
-        for (const n of closestNeighbors) {
-            n.dikjstra_distance = closestNode.dikjstra_distance + 1;
-            n.prevNode = closestNode;
+        for (const node of closestNeighbors) {
+            node.dikjstra_distance = closestNode.dikjstra_distance + 1;
+            node.prevNode = closestNode;
         }
     }
 }
