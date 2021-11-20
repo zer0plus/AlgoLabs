@@ -165,3 +165,85 @@ reset_btn:hover:after {
         padding: 13px 50px 13px;
     }
 }
+
+.walls_on{
+    font-size: 16px;
+    font-weight: 200;
+    letter-spacing: 1px;
+    padding: 13px 20px 13px;
+    outline: 0;
+    border: 1px solid black;
+    cursor: pointer;
+    position: relative;
+    background-color: rgb(221, 130, 130);
+    background-color: rgb(217, 214, 226);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    margin: 13px;
+    margin-bottom: 20px;
+}
+
+walls_on:after {
+    content: "";
+    background-color: #ffe54c;
+    width: 100%;
+    z-index: -1;
+    position: absolute;
+    height: 100%;
+    top: 7px;
+    left: 7px;
+    transition: 0.2s;
+}
+
+walls_on:hover:after {
+    top: 0px;
+    left: 0px;
+}
+
+@media (min-width: 768px) {
+    walls_on {
+        padding: 13px 50px 13px;
+    }
+}
+
+.walls_off{
+    font-size: 16px;
+    font-weight: 200;
+    letter-spacing: 1px;
+    padding: 13px 20px 13px;
+    outline: 0;
+    border: 1px solid black;
+    cursor: pointer;
+    position: relative;
+    background-color: rgb(221, 130, 130);
+    background-color: rgb(217, 214, 226);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    margin: 13px;
+    margin-bottom: 20px;
+}
+
+walls_off:after {
+    content: "";
+    background-color: #ffe54c;
+    width: 100%;
+    z-index: -1;
+    position: absolute;
+    height: 100%;
+    top: 7px;
+    left: 7px;
+    transition: 0.2s;
+}
+
+walls_off:hover:after {
+    top: 0px;
+    left: 0px;
+}
+
+@media (min-width: 768px) {
+    walls_off {
+        padding: 13px 50px 13px;
+    }
+}

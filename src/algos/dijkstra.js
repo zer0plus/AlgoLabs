@@ -1,8 +1,8 @@
 import { MAX_COL, MAX_ROW } from "../constants";
 
+    // Main Implementation of Dijkstra's Algorithm
 export function dijkstra(grid, start, end) {
-    // the main grid passed here could just be 1d with all the 
-    // node ojbects in order as they have row, col property anyway
+    // the main grid passed here could just be 1d with all the node ojbects in order as they store row and col property anyway
     const nodes_1d_arr = [];
     const dijkstra_nodes = [];
     start.dikjstra_distance = 0;
@@ -42,10 +42,12 @@ export function dijkstra(grid, start, end) {
     }
 }
 
+// Sorts all the nodes by the shortest dijkstra distance from the current point
 function sortNodes (nodes) {
     nodes.sort((nodeA, nodeB) => nodeA.dikjstra_distance - nodeB.dikjstra_distance);
 }
 
+// Returns all the closed neighboring nodes from the current node
 function findNeighbor(closestNode, grid) {
     const neighbors = [];
     const {col, row} = closestNode;
@@ -56,80 +58,11 @@ function findNeighbor(closestNode, grid) {
     return neighbors.filter(neighbor => !neighbor.isOpen);
 }
 
-function neighborFinderRight(row, col) {
-
-    // Check for out of bounds for the given node
-    if ((col > MAX_COL) || (row > MAX_ROW) || (col < 0) || (row < 0)){
-        return -1; // Invalid Node Return Signal
-    }
-
-    // Then check for out of bounds for the node's neighbours 
-    if (!( (col + 1) > MAX_COL )){
-        return [(col + 1), row];
-    }
-    // else {
-    //     return [-1, -1]; //Neighbor doesn't exist signal
-    // }
-}
-
-function neighborFinderLeft(row, col) {
-
-    // Check for out of bounds for the given node
-    if ((col > MAX_COL) || (row > MAX_ROW) || (col < 0) || (row < 0)){
-        return -1; // Invalid Node Return Signal
-    }
-
-    // Then check for out of bounds for the node's neighbours 
-    if (!( (col - 1) < 0 )){
-        return [(col - 1), row];
-    }
-    // else {
-    //     return [-1, -1]; //Neighbor doesn't exist signal
-    // }
-}
-
-function neighborFinderUp(row, col) {
-
-    // Check for out of bounds for the given node
-    if ((col > MAX_COL) || (row > MAX_ROW) || (col < 0) || (row < 0)){
-        return -1; // Invalid Node Return Signal
-    }
-
-    // Then check for out of bounds for the node's neighbours 
-    if (!( (row + 1) > MAX_ROW )){
-        return [col, (row + 1)];
-    }
-    // else {
-    //     return [-1, -1]; //Neighbor doesn't exist signal
-    // }
-}
-
-function neighborFinderDown(row, col) {
-
-    // Check for out of bounds for the given node
-    if ((col > MAX_COL) || (row > MAX_ROW) || (col < 0) || (row < 0)){
-        return -1; // Invalid Node Return Signal
-    }
-
-    // Then check for out of bounds for the node's neighbours 
-    if (!( (row - 1) < 0 )){
-        return [col, (row - 1)];
-    }
-    // else {
-    //     return [-1, -1]; //Neighbor doesn't exist signal
-    // }
-}
-
+// Function which backtracks and stores the shortest path from start to end node after Dijkstra is done exploring for the end node
 export function backtrackShortestPath(end) {
     console.log("iinside backtrck");
     console.log(end);
-    // const backtrackedArr = [];
-    // let curr = end;
-    // while (curr !== null) {
-    //     backtrackedArr.unshift(curr);
-    //     curr = curr.prevNode;
-    // }
-    // return backtrackedArr;
+
     const nodesInShortestPathOrder = [];
     let currentNode = end;
     while (currentNode !== null) {

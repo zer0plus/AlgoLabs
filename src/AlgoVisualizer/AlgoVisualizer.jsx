@@ -3,7 +3,6 @@ import './AlgoVisualizer.css';
 import React, {Component} from 'react';
 import { dijkstra, backtrackShortestPath } from '../algos/dijkstra';
 import { MAX_COL, MAX_ROW } from '../constants';
-// import { Navbar } from './Navbar.js';
 
 const createNode = (col, row) => {
     return {
@@ -21,6 +20,8 @@ const createNode = (col, row) => {
 };
 
 export default class AlgoVisualizer extends Component {
+
+    //React Constructor 
     constructor() {
         super();
         this.state = {
@@ -31,6 +32,8 @@ export default class AlgoVisualizer extends Component {
           endCol: null,
         };
         this.visualizeDijkstra = this.visualizeDijkstra.bind(this);
+        this.wallsOn = this.wallsOn.bind(this);
+        this.wallsOff = this.wallsOff.bind(this);
         this.startBtn = this.startBtn.bind(this);
         this.endBtn = this.endBtn.bind(this);
         this.visualizeStart = this.visualizeStart.bind(this);
@@ -53,22 +56,24 @@ export default class AlgoVisualizer extends Component {
         this.setState({grid: grid});
     }
 
-    //Fix Double visualize issue
+    // Toggle Button to enable creation of walls
+    wallsOn() {
+        
+    }
+
+    // Toggle Button to disable creation of walls
+    wallsOff() {
+
+    }
+
+    // Button to reset grid to default
     resetBtn() {
         const tempGrid = [...this.state.grid];
-        // // DEBUG CODE 
-        // console.log("DEBUG CODE ");
-        // console.log(startCol);
-        // console.log(startRow);
-        // console.log(endCol);
-        // console.log(endRow);
-
         this.start = false;
         this.end = false;
 
-        // Initializes the grid
+        // Initializes the grid to default state where each node is closed
         for (let row = 0; row < MAX_ROW; row++) {
-            const currentRow = [];
             for (let col = 0; col < MAX_COL; col++) {
                 document.getElementById(`node-${row}-${col}`).className ='node';
                 tempGrid[row][col].start = false;
@@ -77,21 +82,9 @@ export default class AlgoVisualizer extends Component {
                 tempGrid[row][col].isEndToggle = false;
                 tempGrid[row][col].dikjstra_distance = Infinity;
                 tempGrid[row][col].prevNode = null;
-                // currentRow.push(createNode(col, row));
+                tempGrid[row][col].isOpen = false;
             }
-            // tempGrid.push(currentRow);
         }
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
-        // const tempGrid = [];
-        // // Initializes the grid
-        // for (let row = 0; row < MAX_ROW; row++) {
-        //     const currentRow = [];
-        //     for (let col = 0; col < MAX_COL; col++) {
-        //         currentRow.push(createNode(col, row));
-        //     }
-        //     tempGrid.push(currentRow);
-        // }
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
 
         let {startRow} = this.state;
         let {startCol} = this.state;
@@ -110,50 +103,41 @@ export default class AlgoVisualizer extends Component {
             endRow: endRow,
             endCol: endCol
         });
-
-        // DEBUG CODE 
-        console.log("DEBUG CODE ");
-        console.log(startCol);
-        console.log(startRow);
-        console.log(endCol);
-        console.log(endRow);
     }
 
+    // Button to visualize the Dijkstra path finding algorithm for the selected start/end points
     visualizeDijkstra() {
-        // DEBUG CODE 
-        console.log("Dijkstra!");
+
+        console.log("visualizeDijkstra()!");
         const {grid} = this.state;
         const {startRow} = this.state;
         const {startCol} = this.state;
         const {endRow} = this.state;
         const {endCol} = this.state;
 
-        // DEBUG CODE 
-        console.log(startCol);
-        console.log(startRow);
-        console.log(endCol);
-        console.log(endRow);
+        if (startRow === null || startCol === null || endCol === null || endRow === null){
+            alert("ERROR: Please select a start node and an end node to visualize Dijkstra's algorithm");
+            return;
+        }
 
         const start = grid[startRow][startCol];
         const end = grid[endRow][endCol];
 
-        // DEBUG CODE 
-        console.log(start);
-        console.log(end);
-
         // Parameters take in the starting and ending nodes's objects 
         const dijkstraNodes = dijkstra(grid, start, end);
         const backtrackedNodes = backtrackShortestPath(end);
+
         //Animate
         this.colorDijkstra(dijkstraNodes, backtrackedNodes);
     }
 
+    // Helper Function to color the Dikjstra search path to the end point
     colorDijkstra(dijkstraNodes, backtrackedNodes) {
         console.log("color func");
         for (let i = 0; i <= dijkstraNodes.length; i++){
             if (i === dijkstraNodes.length) {
                 setTimeout(() => {
-                  this.colorShortest(backtrackedNodes);
+                  this.colorPath(backtrackedNodes);
                 }, 10 * i);
                 return;
             }
@@ -166,7 +150,8 @@ export default class AlgoVisualizer extends Component {
         }
     }
     
-    colorShortest(nodes) {
+    // Helper Function to color the exact shortest path from the start to end point
+    colorPath(nodes) {
         for (let i = 0; i < nodes.length; i++) {
             setTimeout(() => {
                 const node = nodes[i];
@@ -252,11 +237,14 @@ export default class AlgoVisualizer extends Component {
         return(
             <> 
                 <div className="grid">
-                    <button className = "dijkstra_btn" onClick = {() => this.visualizeDijkstra()}>Visualize Dijkstra!</button>
+
                     <button className = "start_btn" onClick = {() => this.startBtn()}>Select Start Node</button>
                     <button className = "end_btn" onClick = {() => this.endBtn()}>Select End Node</button>
-                    {/* <br/> */}
                     <button className = "reset_btn" onClick = {() => this.resetBtn()}>Reset Nodes</button>
+                    <button className = "walls_on" onClick = {() => this.wallsOn()}>Toggle Walls On</button>
+                    <button className = "walls_off" OffClick = {() => this.wallsOff()}>Toggle Walls Off</button>
+                    <br/>
+                    <button className = "dijkstra_btn" onClick = {() => this.visualizeDijkstra()}>Visualize Dijkstra!</button>
                     {/* The row map() method creates a new array with the results of calling a function for every array element. */}
                     {grid.map((row, rowIdx) => {
                         return ( 
