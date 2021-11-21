@@ -14,6 +14,7 @@ const createNode = (col, row) => {
         isEndToggle: false,
         dikjstra_distance: Infinity,
         isWall: false,
+        isWallToggle: false,
         isOpen: false,
         prevNode: null,
     };
@@ -32,10 +33,11 @@ export default class AlgoVisualizer extends Component {
           endCol: null,
         };
         this.visualizeDijkstra = this.visualizeDijkstra.bind(this);
-        this.wallsOn = this.wallsOn.bind(this);
-        this.wallsOff = this.wallsOff.bind(this);
+        this.wallsBtn = this.wallsBtn.bind(this);
+        // this.wallsOff = this.wallsOff.bind(this);
         this.startBtn = this.startBtn.bind(this);
         this.endBtn = this.endBtn.bind(this);
+        this.visualizeWall = this.visualizeWall.bind(this);
         this.visualizeStart = this.visualizeStart.bind(this);
         this.visualizeEnd = this.visualizeEnd.bind(this);
         this.resetBtn = this.resetBtn.bind(this);
@@ -56,16 +58,6 @@ export default class AlgoVisualizer extends Component {
         this.setState({grid: grid});
     }
 
-    // Toggle Button to enable creation of walls
-    wallsOn() {
-        
-    }
-
-    // Toggle Button to disable creation of walls
-    wallsOff() {
-
-    }
-
     // Button to reset grid to default
     resetBtn() {
         const tempGrid = [...this.state.grid];
@@ -83,6 +75,8 @@ export default class AlgoVisualizer extends Component {
                 tempGrid[row][col].dikjstra_distance = Infinity;
                 tempGrid[row][col].prevNode = null;
                 tempGrid[row][col].isOpen = false;
+                tempGrid[row][col].isWall = false;
+                tempGrid[row][col].isWallToggle = false;
             }
         }
 
@@ -107,7 +101,6 @@ export default class AlgoVisualizer extends Component {
 
     // Button to visualize the Dijkstra path finding algorithm for the selected start/end points
     visualizeDijkstra() {
-
         console.log("visualizeDijkstra()!");
         const {grid} = this.state;
         const {startRow} = this.state;
@@ -161,6 +154,24 @@ export default class AlgoVisualizer extends Component {
         }
     }
 
+    // Changes a node's color to black when clicked to be a wall
+    visualizeWall(currRow, currCol) {
+        console.log("SYS: Wall Selected");
+        const tempGrid = [...this.state.grid];
+        for (let row = 0; row < 20; row++) {
+            for (let col = 0; col < 50; col++) {
+                console.log("SYS: Updating Wall Nodes...")
+                tempGrid[row][col].isStartToggle = false;
+                tempGrid[row][col].isEndToggle = false;
+                tempGrid[row][col].isWallToggle  = false;
+            }
+        }
+        tempGrid[currRow][currCol].isWall = !(tempGrid[currRow][currCol].isWall);
+        this.setState({
+            grid: tempGrid
+        });
+    }
+
     // Changes a node's color to green when clicked to be an start point.
     visualizeStart(currRow, currCol) {
         console.log("SYS: Start Selected");
@@ -203,9 +214,21 @@ export default class AlgoVisualizer extends Component {
         });        
     }
 
+    // Toggle Button to enable creation of walls
+    wallsBtn() {
+        let tempGrid = [...this.state.grid]; 
+        for (let row = 0; row < 20; row++) {
+            for (let col = 0; col < 50; col++) {
+                tempGrid[row][col].isWallToggle = !tempGrid[row][col].isWallToggle;
+                tempGrid[row][col].isEndToggle = false;
+                tempGrid[row][col].isStartToggle = false;
+            }
+        }
+        this.setState({tempGrid});
+    }
+
     // Turns all the nodes clickable to be a start point
     startBtn() {
-        this.isEndToggle = false;
         let tempGrid = [...this.state.grid];
         for (let row = 0; row < 20; row++) {
             for (let col = 0; col < 50; col++) {
@@ -220,7 +243,6 @@ export default class AlgoVisualizer extends Component {
     // Turns all the nodes clickable to be an end point
     endBtn() {
         console.log("end");
-        this.isStartToggle = false;
         let tempGrid = [...this.state.grid]
         for (let row = 0; row < 20; row++) {
             for (let col = 0; col < 50; col++) {
@@ -241,8 +263,8 @@ export default class AlgoVisualizer extends Component {
                     <button className = "start_btn" onClick = {() => this.startBtn()}>Select Start Node</button>
                     <button className = "end_btn" onClick = {() => this.endBtn()}>Select End Node</button>
                     <button className = "reset_btn" onClick = {() => this.resetBtn()}>Reset Nodes</button>
-                    <button className = "walls_on" onClick = {() => this.wallsOn()}>Toggle Walls On</button>
-                    <button className = "walls_off" OffClick = {() => this.wallsOff()}>Toggle Walls Off</button>
+                    <button className = "walls_on" onClick = {() => this.wallsBtn()}>Toggle Walls</button>
+                    {/* <button className = "walls_off" OffClick = {() => this.wallsOff()}>Toggle Walls Off</button> */}
                     <br/>
                     <button className = "dijkstra_btn" onClick = {() => this.visualizeDijkstra()}>Visualize Dijkstra!</button>
                     {/* The row map() method creates a new array with the results of calling a function for every array element. */}
@@ -251,7 +273,7 @@ export default class AlgoVisualizer extends Component {
                             <div key = {rowIdx}>
                                 {/* The col map() method creates a new array with the results of calling a function for every array element. */}
                                 {row.map((node, ndx) => {
-                                    const {row, col, end, start, isWall ,isStartToggle, isEndToggle} = node;
+                                    const {row, col, end, start, isWall, isWallToggle ,isStartToggle, isEndToggle} = node;
                                     console.log("node");
                                     return (
                                         <Node
@@ -263,8 +285,10 @@ export default class AlgoVisualizer extends Component {
                                             start = {start}
                                             end = {end}
                                             isWall = {isWall}
+                                            isWallToggle = {isWallToggle}
                                             isStartToggle = {isStartToggle}
                                             isEndToggle = {isEndToggle}
+                                            visualizeWall = {() => this.visualizeWall(rowIdx, ndx)}
                                             visualizeStart = {() => this.visualizeStart(rowIdx, ndx)}
                                             visualizeEnd = {() => this.visualizeEnd(rowIdx, ndx)}
                                         >

@@ -9,8 +9,11 @@ export default class Node extends Component {
     }
 
     render() {
-        const {key, grid, start, end, isStartToggle, isEndToggle, visualizeStart, visualizeEnd, row, col} = this.props;
+        const {key, grid, start, end, isWall, isWallToggle, isStartToggle, isEndToggle, visualizeStart, visualizeEnd, row, col} = this.props;
         let extraParams = '';
+
+        
+
         if(start){
             extraParams = 'node_start';
             return (
@@ -33,8 +36,40 @@ export default class Node extends Component {
                 </div>
             );
         }
+        else if (isWall && isWallToggle) {
+            extraParams = 'node_wall node_toggle';
+            return (
+                <div
+                id={`node-${row}-${col}`}
+                onMouseDown = {this.props.visualizeWall}
+                className = {`node ${extraParams}`}
+                >
+                </div>
+            );
+        }
+        else if (isWall) {
+            extraParams = 'node_wall';
+            return (
+                <div
+                id={`node-${row}-${col}`}
+                className = {`node ${extraParams}`}
+                >
+                </div>
+            );
+        }
+        else if (isWallToggle){
+            extraParams = 'node_toggle';
+            return (
+                <div 
+                id={`node-${row}-${col}`}
+                onMouseDown = {this.props.visualizeWall} 
+                className = {`node ${extraParams}`} 
+                >
+                </div>
+            );
+        }
         else if(isStartToggle){
-            extraParams = 'node_start_toggle';
+            extraParams = 'node_toggle';
             return (
                 <div 
                 id={`node-${row}-${col}`}
@@ -45,7 +80,7 @@ export default class Node extends Component {
             );
         }
         else if (isEndToggle){
-            extraParams = 'node_end_toggle';
+            extraParams = 'node_toggle';
             return (
                 <div
                 id={`node-${row}-${col}`}
@@ -55,6 +90,7 @@ export default class Node extends Component {
                 </div>
             );
         }
+
         else {
             return (
                 <div 
