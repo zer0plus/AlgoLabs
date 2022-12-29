@@ -1,8 +1,9 @@
 import Node from './Node/Node';
-import './AlgoVisualizer.css';
+import './DijkstraVisualizer.css';
 import React, {Component} from 'react';
 import { dijkstra, backtrackShortestPath } from '../algos/dijkstra';
 import { MAX_COL, MAX_ROW } from '../constants';
+import Navbar from '../Navbar';
 
 const createNode = (col, row) => {
     return {
@@ -20,17 +21,18 @@ const createNode = (col, row) => {
     };
 };
 
-export default class AlgoVisualizer extends Component {
+export default class DijkstraVisualizer extends Component {
 
     //React Constructor 
     constructor() {
         super();
         this.state = {
-          grid: [],
-          startRow: null,
-          startCol: null,
-          endRow: null,
-          endCol: null,
+            grid: [],
+            startRow: null,
+            startCol: null,
+            endRow: null,
+            endCol: null,
+            isNavOpen: false,
         };
         this.visualizeDijkstra = this.visualizeDijkstra.bind(this);
         this.wallsBtn = this.wallsBtn.bind(this);
@@ -41,6 +43,7 @@ export default class AlgoVisualizer extends Component {
         this.visualizeStart = this.visualizeStart.bind(this);
         this.visualizeEnd = this.visualizeEnd.bind(this);
         this.resetBtn = this.resetBtn.bind(this);
+        this.toggleNavOpen = this.toggleNavOpen.bind(this);
     }
 
     //Func componentDidMount() loads on website boot
@@ -58,6 +61,9 @@ export default class AlgoVisualizer extends Component {
         this.setState({grid: grid});
     }
 
+    toggleNavOpen() {
+        this.setState({isNavOpen: this.state.isNavOpen})
+    }
     // Button to reset grid to default
     resetBtn() {
         const tempGrid = [...this.state.grid];
@@ -176,8 +182,8 @@ export default class AlgoVisualizer extends Component {
     visualizeStart(currRow, currCol) {
         console.log("SYS: Start Selected");
         const tempGrid = [...this.state.grid];
-        for (let row = 0; row < 20; row++) {
-            for (let col = 0; col < 50; col++) {
+        for (let row = 0; row < MAX_ROW; row++) {
+            for (let col = 0; col < MAX_COL; col++) {
                 console.log("SYS: Updating Nodes...")
                 tempGrid[row][col].start = false;
                 tempGrid[row][col].isStartToggle = false;
@@ -197,8 +203,8 @@ export default class AlgoVisualizer extends Component {
     visualizeEnd(currRow, currCol) {
         console.log("SYS: End Selected");
         const tempGrid = [...this.state.grid];
-        for (let row = 0; row < 20; row++) {
-            for (let col = 0; col < 50; col++) {
+        for (let row = 0; row < MAX_ROW; row++) {
+            for (let col = 0; col < MAX_COL; col++) {
                 console.log("SYS: Updating Nodes...")
                 tempGrid[row][col].end = false;
                 tempGrid[row][col].isStartToggle = false;
@@ -217,8 +223,8 @@ export default class AlgoVisualizer extends Component {
     // Toggle Button to enable creation of walls
     wallsBtn() {
         let tempGrid = [...this.state.grid]; 
-        for (let row = 0; row < 20; row++) {
-            for (let col = 0; col < 50; col++) {
+        for (let row = 0; row < MAX_ROW; row++) {
+            for (let col = 0; col < MAX_COL; col++) {
                 tempGrid[row][col].isWallToggle = !tempGrid[row][col].isWallToggle;
                 tempGrid[row][col].isEndToggle = false;
                 tempGrid[row][col].isStartToggle = false;
@@ -258,8 +264,8 @@ export default class AlgoVisualizer extends Component {
         console.log("Rendering...");
         return(
             <> 
-                <div className="grid">
-
+                <Navbar toggle={this.state.isNavOpen}/>
+                <div className="gridContainer">
                     <button className = "start_btn" onClick = {() => this.startBtn()}>Select Start Node</button>
                     <button className = "end_btn" onClick = {() => this.endBtn()}>Select End Node</button>
                     <button className = "reset_btn" onClick = {() => this.resetBtn()}>Reset Nodes</button>

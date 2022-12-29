@@ -9,11 +9,8 @@ export default class Node extends Component {
     }
 
     render() {
-        const {key, grid, start, end, isWall, isWallToggle, isStartToggle, isEndToggle, visualizeStart, visualizeEnd, row, col} = this.props;
+        const {start, end, isWall, isWallToggle, isStartToggle, isEndToggle, row, col} = this.props;
         let extraParams = '';
-
-        
-
         if(start){
             extraParams = 'node_start';
             return (
@@ -103,8 +100,3 @@ export default class Node extends Component {
         }
     }
 }
-
-// export const DEFAULT_NODE = {
-//     row: 0,
-//     col: 0,
-// };

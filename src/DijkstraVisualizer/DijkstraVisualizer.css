@@ -1,0 +1,249 @@
+.gridContainer {
+  margin: 30px 0 0;
+  color: black;
+}
+
+.dijkstra_btn{
+    font-size: 16px;
+    font-weight: 200;
+    letter-spacing: 1px;
+    padding: 13px 20px 13px;
+    outline: 0;
+    border: 1px solid black;
+    cursor: pointer;
+    position: relative;
+    background-color: rgb(221, 130, 130);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    margin: 13px;
+    margin-bottom: 20px;
+}
+
+dijkstra_btn:after {
+    content: "";
+    background-color: #ffe54c;
+    width: 100%;
+    z-index: -1;
+    position: absolute;
+    height: 100%;
+    top: 7px;
+    left: 7px;
+    transition: 0.2s;
+}
+
+dijkstra_btn:hover:after {
+    top: 0px;
+    left: 0px;
+}
+
+@media (min-width: 768px) {
+    dijkstra_btn {
+        padding: 13px 50px 13px;
+    }
+}
+
+.start_btn{
+    font-size: 16px;
+    font-weight: 200;
+    letter-spacing: 1px;
+    padding: 13px 20px 13px;
+    outline: 0;
+    border: 1px solid black;
+    cursor: pointer;
+    position: relative;
+    background-color: rgb(151, 211, 166);
+    background-color: rgb(217, 214, 226);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    margin: 13px;
+    margin-bottom: 20px;
+}
+
+start_btn:after {
+    content: "";
+    background-color: #ffe54c;
+    width: 100%;
+    z-index: -1;
+    position: absolute;
+    height: 100%;
+    top: 7px;
+    left: 7px;
+    transition: 0.2s;
+}
+
+start_btn:hover:after {
+    top: 0px;
+    left: 0px;
+}
+
+@media (min-width: 768px) {
+    start_btn {
+        padding: 13px 50px 13px;
+    }
+}
+
+.end_btn{
+    font-size: 16px;
+    font-weight: 200;
+    letter-spacing: 1px;
+    padding: 13px 20px 13px;
+    outline: 0;
+    border: 1px solid black;
+    cursor: pointer;
+    position: relative;
+    background-color: rgb(229, 155, 155);
+    background-color: rgb(217, 214, 226);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    margin: 13px;
+    margin-bottom: 20px;
+}
+
+end_btn:after {
+    content: "";
+    background-color: #ffe54c;
+    width: 100%;
+    z-index: -1;
+    position: absolute;
+    height: 100%;
+    top: 7px;
+    left: 7px;
+    transition: 0.2s;
+}
+
+end_btn:hover:after {
+    top: 0px;
+    left: 0px;
+}
+
+@media (min-width: 768px) {
+    end_btn {
+        padding: 13px 50px 13px;
+    }
+}
+
+.reset_btn{
+    font-size: 16px;
+    font-weight: 200;
+    letter-spacing: 1px;
+    padding: 13px 20px 13px;
+    outline: 0;
+    border: 1px solid black;
+    cursor: pointer;
+    position: relative;
+    background-color: rgb(221, 130, 130);
+    background-color: rgb(217, 214, 226);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    margin: 13px;
+    margin-bottom: 20px;
+}
+
+reset_btn:after {
+    content: "";
+    background-color: #ffe54c;
+    width: 100%;
+    z-index: -1;
+    position: absolute;
+    height: 100%;
+    top: 7px;
+    left: 7px;
+    transition: 0.2s;
+}
+
+reset_btn:hover:after {
+    top: 0px;
+    left: 0px;
+}
+
+@media (min-width: 768px) {
+    reset_btn {
+        padding: 13px 50px 13px;
+    }
+}
+
+.walls_on{
+    font-size: 16px;
+    font-weight: 200;
+    letter-spacing: 1px;
+    padding: 13px 20px 13px;
+    outline: 0;
+    border: 1px solid black;
+    cursor: pointer;
+    position: relative;
+    background-color: rgb(221, 130, 130);
+    background-color: rgb(217, 214, 226);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    margin: 13px;
+    margin-bottom: 20px;
+}
+
+walls_on:after {
+    content: "";
+    background-color: #ffe54c;
+    width: 100%;
+    z-index: -1;
+    position: absolute;
+    height: 100%;
+    top: 7px;
+    left: 7px;
+    transition: 0.2s;
+}
+
+walls_on:hover:after {
+    top: 0px;
+    left: 0px;
+}
+
+@media (min-width: 768px) {
+    walls_on {
+        padding: 13px 50px 13px;
+    }
+}
+
+.walls_off{
+    font-size: 16px;
+    font-weight: 200;
+    letter-spacing: 1px;
+    padding: 13px 20px 13px;
+    outline: 0;
+    border: 1px solid black;
+    cursor: pointer;
+    position: relative;
+    background-color: rgb(221, 130, 130);
+    background-color: rgb(217, 214, 226);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    margin: 13px;
+    margin-bottom: 20px;
+}
+
+walls_off:after {
+    content: "";
+    background-color: #ffe54c;
+    width: 100%;
+    z-index: -1;
+    position: absolute;
+    height: 100%;
+    top: 7px;
+    left: 7px;
+    transition: 0.2s;
+}
+
+walls_off:hover:after {
+    top: 0px;
+    left: 0px;
+}
+
+@media (min-width: 768px) {
+    walls_off {
+        padding: 13px 50px 13px;
+    }
+}

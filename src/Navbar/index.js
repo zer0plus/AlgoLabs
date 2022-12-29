@@ -1,7 +1,7 @@
 import React from 'react'
 import { FaBars } from 'react-icons/fa'
-import {Nav, NavContainer, NavLogo, MobileIcon, NavMenu, NavItem, NavLinks, NavBtn, NavBtnLink} from './NavbarElements';
-// import styles from './index.css';
+import {Nav, NavContainer, NavLogo, MobileIcon, NavMenu, NavItem, NavLinks, NavBtn} from './NavbarElements';
+
 const Navbar = ({ toggle }) => {
     return (
     <>
@@ -15,10 +15,10 @@ const Navbar = ({ toggle }) => {
                 </MobileIcon>
                 <NavMenu>
                     <NavItem>
-                         {/* <NavLinks to="/about"> About </NavLinks> */}
+                         <NavLinks to="/dijkstra"> Dijkstra </NavLinks>
                     </NavItem>
                     <NavItem>
-                         {/* <NavLinks to="/menu"> Menu </NavLinks> */}
+                         <NavLinks to="/a*"> A* </NavLinks>
                     </NavItem>
                     <NavItem>
                          {/* <NavLinks to="/services"> Services </NavLinks> */}

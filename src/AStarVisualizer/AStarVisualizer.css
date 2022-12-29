@@ -1,9 +1,9 @@
-.grid {
-  margin: 30px 0 0;
-  color: black;
+.gridContainer {
+    margin: 30px 0 0;
+    color: black;
 }
-
-.dijkstra_btn{
+  
+.a_star_btn {
     font-size: 16px;
     font-weight: 200;
     letter-spacing: 1px;
@@ -19,8 +19,8 @@
     margin: 13px;
     margin-bottom: 20px;
 }
-
-dijkstra_btn:after {
+  
+a_star_btn:after {
     content: "";
     background-color: #ffe54c;
     width: 100%;
@@ -31,14 +31,14 @@ dijkstra_btn:after {
     left: 7px;
     transition: 0.2s;
 }
-
-dijkstra_btn:hover:after {
+  
+a_star_btn:hover:after {
     top: 0px;
     left: 0px;
 }
-
+  
 @media (min-width: 768px) {
-    dijkstra_btn {
+    a_star_btn {
         padding: 13px 50px 13px;
     }
 }
@@ -84,7 +84,7 @@ start_btn:hover:after {
     }
 }
 
-.end_btn{
+.goal_btn{
     font-size: 16px;
     font-weight: 200;
     letter-spacing: 1px;
@@ -102,7 +102,7 @@ start_btn:hover:after {
     margin-bottom: 20px;
 }
 
-end_btn:after {
+goal_btn:after {
     content: "";
     background-color: #ffe54c;
     width: 100%;
@@ -114,13 +114,13 @@ end_btn:after {
     transition: 0.2s;
 }
 
-end_btn:hover:after {
+goal_btn:hover:after {
     top: 0px;
     left: 0px;
 }
 
 @media (min-width: 768px) {
-    end_btn {
+    goal_btn {
         padding: 13px 50px 13px;
     }
 }

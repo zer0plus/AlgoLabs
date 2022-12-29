@@ -1,4 +1,3 @@
-import { MAX_COL, MAX_ROW } from "../constants";
 
     // Main Implementation of Dijkstra's Algorithm
 export function dijkstra(grid, start, end) {
